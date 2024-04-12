@@ -1,25 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fecthComments } from "../../store/Slice/api.slice.js";
-import CommentItem from "../Item/index.jsx";
+import { fecthPosts } from "../../store/Slice/api.slice.js";
+import PostItem from "../Item/index.jsx";
+import { Link } from "react-router-dom";
 // import Form from "../Form/index.jsx";
 
-function CommentList() {
+function postList() {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.comments.comments);
+  const posts = useSelector((state) => state.posts.posts);
 
   useEffect(() => {
-    dispatch(fecthComments());
+    dispatch(fecthPosts());
   }, [dispatch]);
 
   return (
     <div>
       <h2>List coms</h2>
-      {/* <Form /> */}
       <div>
         <ul>
-          {comments.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} />
+          {posts.map((post) => (
+            <Link key={post.id} to={`/posts/${post.id}`} state={{ post }}>
+              <PostItem post={post} />
+            </Link>
           ))}
         </ul>
       </div>
@@ -27,4 +29,4 @@ function CommentList() {
   );
 }
 
-export default CommentList;
+export default postList;

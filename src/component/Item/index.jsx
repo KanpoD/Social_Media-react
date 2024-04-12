@@ -1,30 +1,37 @@
+import React from "react";
 import { useDispatch } from "react-redux";
-import {
-    deleteComment,
-    clickOnComment,
-} from "../../store/Slice/api.slice.js";
+import { likePost, clickOnPost } from "../../store/Slice/api.slice.js";
 
-const CommentItem = ({ comment }) => {
+import User from "../User/index.jsx";
 
+const PostItem = ({ post }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(clickOnComment(comment.id));
+    dispatch(clickOnPost(post.id));
   };
 
-  const handleDelete = () => {
-    dispatch(deleteComment(comment.id));
+  const handleLike = () => {
+    dispatch(likePost(post.id));
   };
 
   return (
-    <li onClick={handleClick}>
-      <h4>{comment.title}</h4>
-      <p>{comment.body}</p>
-      <button onClick={handleDelete}>
-       X
-      </button>
+    <li className="post" onClick={handleClick}>
+      <div className="postHeader">
+        <User key={post.id} post={post} />
+      </div>
+      <div className="postContainer">
+        <h4>{post.title}</h4>
+        <p>{post.body}</p>
+        <div className="likes">
+          <span>Likes : {post.like ? 1 : 0}</span>
+          <button onClick={handleLike}>
+            <i className="fa-solid fa-heart"></i>
+          </button>
+        </div>
+      </div>
     </li>
   );
 };
 
-export default CommentItem;
+export default PostItem;

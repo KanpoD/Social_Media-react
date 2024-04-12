@@ -1,3 +1,5 @@
-export const selectCommentTitle = state => state.comments.commentTitle;
+export const selectPostTitle = state => state.posts.postsTitle;
 
-export const selectComment = state => state.comments.comment;
+export const selectPost = state => state.posts.posts;
+
+export const selectComments = (state) => state.posts.comments;

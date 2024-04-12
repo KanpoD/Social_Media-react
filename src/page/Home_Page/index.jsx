@@ -1,7 +1,9 @@
+import PostList from '../../component/List/index.jsx';
+
 function HomePage() {
     return (
       <div>
-        <h1>HomePage</h1>
+        <PostList />
       </div>
     );
   }
